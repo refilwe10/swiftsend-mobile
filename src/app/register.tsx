@@ -6,6 +6,7 @@ import { API_URL } from '../config';
 
 export default function Register() {
   const router = useRouter();
+  const [role, setRole] = useState('customer'); // 'customer' or 'driver'
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -14,7 +15,7 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
 
   const handleRegister = async () => {
-    // Basic validation - handles invalid inputs gracefully
+    // Basic validation
     if (!fullName.trim() || !email.trim() || !phone.trim() || !address.trim() || !password.trim()) {
       Alert.alert('Missing Information', 'Please fill in all fields to continue.');
       return;
@@ -38,17 +39,18 @@ export default function Register() {
         email: email,
         phone: phone,
         address: address,
-        password: password
+        password: password,
+        role: role
       });
 
       if (response.data) {
         Alert.alert(
           'Success!',
-          `Welcome to SwiftSend, ${response.data.full_name}!`,
+          `${role === 'driver' ? 'Driver' : 'Customer'} account created successfully!`,
           [{ text: 'OK', onPress: () => router.push('/') }]
         );
       }
-    } catch (error) {
+    } catch (error: any) {
       const message = error.response?.data?.error || 'Registration failed. Please try again.';
       Alert.alert('Registration Error', message);
     } finally {
@@ -57,20 +59,41 @@ export default function Register() {
   };
 
   return (
-    <KeyboardAvoidingView 
+    <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.card}>
           <Text style={styles.logo}>SwiftSend</Text>
-          <Text style={styles.subtitle}>Driver Registration</Text>
+          <Text style={styles.subtitle}>Create Your Account</Text>
+
+          {/* ---------- ROLE SELECTOR ---------- */}
+          <View style={styles.roleContainer}>
+            <TouchableOpacity
+              style={[styles.roleBtn, role === 'customer' && styles.roleBtnActive]}
+              onPress={() => setRole('customer')}
+            >
+              <Text style={[styles.roleText, role === 'customer' && styles.roleTextActive]}>
+                👤 Customer
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={[styles.roleBtn, role === 'driver' && styles.roleBtnActive]}
+              onPress={() => setRole('driver')}
+            >
+              <Text style={[styles.roleText, role === 'driver' && styles.roleTextActive]}>
+                🚚 Driver
+              </Text>
+            </TouchableOpacity>
+          </View>
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Full Name</Text>
             <TextInput
               style={styles.input}
-              placeholder="e.g. Sipho Mokoena"
+              placeholder="e.g. John Doe"
               value={fullName}
               onChangeText={setFullName}
             />
@@ -80,7 +103,7 @@ export default function Register() {
             <Text style={styles.label}>Email Address</Text>
             <TextInput
               style={styles.input}
-              placeholder="driver@swiftsend.co.za"
+              placeholder="you@example.com"
               value={email}
               onChangeText={setEmail}
               autoCapitalize="none"
@@ -120,20 +143,24 @@ export default function Register() {
             />
           </View>
 
-          <TouchableOpacity 
-            style={styles.button} 
+          <TouchableOpacity
+            style={styles.button}
             onPress={handleRegister}
             disabled={loading}
           >
             {loading ? (
               <ActivityIndicator color="#ffffff" />
             ) : (
-              <Text style={styles.buttonText}>Create Account</Text>
+              <Text style={styles.buttonText}>
+                Register as {role === 'driver' ? 'Driver' : 'Customer'}
+              </Text>
             )}
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => router.back()} style={styles.linkContainer}>
-            <Text style={styles.linkText}>Already have an account? <Text style={styles.link}>Login here</Text></Text>
+            <Text style={styles.linkText}>
+              Already have an account? <Text style={styles.link}>Login here</Text>
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -155,7 +182,28 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   logo: { fontSize: 32, fontWeight: 'bold', color: '#003087', textAlign: 'center', marginBottom: 5 },
-  subtitle: { fontSize: 16, color: '#FF6200', textAlign: 'center', marginBottom: 25, fontWeight: '600' },
+  subtitle: { fontSize: 16, color: '#FF6200', textAlign: 'center', marginBottom: 20, fontWeight: '600' },
+  roleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 10,
+    marginBottom: 25,
+  },
+  roleBtn: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: '#E2E8F0',
+    alignItems: 'center',
+    backgroundColor: '#F8FAFC',
+  },
+  roleBtnActive: {
+    borderColor: '#003087',
+    backgroundColor: '#E0F2FE',
+  },
+  roleText: { fontSize: 14, fontWeight: '600', color: '#64748B' },
+  roleTextActive: { color: '#003087' },
   inputGroup: { marginBottom: 15 },
   label: { fontSize: 14, color: '#475569', marginBottom: 8, fontWeight: '500' },
   input: {

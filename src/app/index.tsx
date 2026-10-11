@@ -1,3 +1,4 @@
+Index
 import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native';
@@ -7,6 +8,7 @@ import { API_URL } from '../config';
 export default function Index() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('customer'); // 'customer' or 'driver'
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -19,22 +21,26 @@ export default function Index() {
     setLoading(true);
 
     try {
-      // Send the login request to your backend
+      // Send the login request with the selected role
       const response = await axios.post(`${API_URL}/login`, {
         email: email,
-        password: password
+        password: password,
+        role: role
       });
 
       if (response.data && response.data.message === 'Login successful!') {
         Alert.alert(
-          'Success!', 
-          `Welcome back, ${response.data.customer.full_name}!`,
+          'Success!',
+          `Welcome back, ${response.data.user.full_name}!`,
           [
-            { text: 'OK', onPress: () => router.push('/dashboard') }
+            {
+              text: 'OK',
+              onPress: () => router.push(role === 'driver' ? '/dashboard' : '/customer-dashboard')
+            }
           ]
         );
       }
-    } catch (error) {
+    } catch (error: any) {
       // Show error message if login fails
       const message = error.response?.data?.error || 'Login failed. Please try again.';
       Alert.alert('Login Error', message);
@@ -44,19 +50,40 @@ export default function Index() {
   };
 
   return (
-    <KeyboardAvoidingView 
+    <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
       <View style={styles.card}>
         <Text style={styles.logo}>SwiftSend</Text>
-        <Text style={styles.subtitle}>Driver Portal</Text>
+        <Text style={styles.subtitle}>Courier System</Text>
+
+        {/* ---------- ROLE SELECTOR ---------- */}
+        <View style={styles.roleContainer}>
+          <TouchableOpacity
+            style={[styles.roleBtn, role === 'customer' && styles.roleBtnActive]}
+            onPress={() => setRole('customer')}
+          >
+            <Text style={[styles.roleText, role === 'customer' && styles.roleTextActive]}>
+              👤 Customer
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.roleBtn, role === 'driver' && styles.roleBtnActive]}
+            onPress={() => setRole('driver')}
+          >
+            <Text style={[styles.roleText, role === 'driver' && styles.roleTextActive]}>
+              🚚 Driver
+            </Text>
+          </TouchableOpacity>
+        </View>
 
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Email Address</Text>
           <TextInput
             style={styles.input}
-            placeholder="driver@swiftsend.co.za"
+            placeholder={role === 'driver' ? 'driver@swiftsend.co.za' : 'you@example.com'}
             value={email}
             onChangeText={setEmail}
             autoCapitalize="none"
@@ -75,8 +102,8 @@ export default function Index() {
           />
         </View>
 
-        <TouchableOpacity 
-          style={styles.button} 
+        <TouchableOpacity
+          style={styles.button}
           onPress={handleLogin}
           disabled={loading}
         >
@@ -89,7 +116,7 @@ export default function Index() {
 
         <TouchableOpacity onPress={() => router.push('/register')} style={styles.registerLink}>
           <Text style={styles.registerText}>
-            New driver? <Text style={styles.registerBold}>Register here</Text>
+            New user? <Text style={styles.registerBold}>Register here</Text>
           </Text>
         </TouchableOpacity>
       </View>
@@ -125,8 +152,35 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#FF6200',
     textAlign: 'center',
-    marginBottom: 30,
+    marginBottom: 20,
     fontWeight: '600',
+  },
+  roleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 10,
+    marginBottom: 25,
+  },
+  roleBtn: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: '#E2E8F0',
+    alignItems: 'center',
+    backgroundColor: '#F8FAFC',
+  },
+  roleBtnActive: {
+    borderColor: '#003087',
+    backgroundColor: '#E0F2FE',
+  },
+  roleText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#64748B',
+  },
+  roleTextActive: {
+    color: '#003087',
   },
   inputGroup: {
     marginBottom: 20,

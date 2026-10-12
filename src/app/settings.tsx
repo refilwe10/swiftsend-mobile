@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert, ScrollView, Switch, TextInput } from 'react-native';
 import { useRouter } from 'expo-router';
+import { clearUser } from '../auth';
 
 export default function Settings() {
   const router = useRouter();
@@ -26,20 +27,23 @@ export default function Settings() {
     );
   };
 
-  const handleLogout = () => {
-    Alert.alert(
-      'Logout',
-      'Are you sure you want to log out?',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        { 
-          text: 'Logout', 
-          style: 'destructive',
-          onPress: () => router.replace('/')
+  const handleLogout = async () => {
+  Alert.alert(
+    'Logout',
+    'Are you sure you want to log out?',
+    [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Logout',
+        style: 'destructive',
+        onPress: async () => {
+          await clearUser();
+          router.replace('/');
         }
-      ]
-    );
-  };
+      }
+    ]
+  );
+};
 
   return (
     <ScrollView style={styles.container}>

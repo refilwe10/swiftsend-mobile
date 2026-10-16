@@ -6,7 +6,7 @@ Driver and Customer mobile application for SwiftSend Couriers, built with React 
 
 This mobile app is part of the SwiftSend Courier Management System, developed as part of the XISD5319 Work Integrated Learning module (Task 2). It connects to a Node.js backend and MySQL database to provide real-time delivery tracking and management.
 
-## ✨ Features
+##  Features
 
 - **User Registration** with role selection (Customer / Driver)
 - **Secure Login** with bcrypt password encryption
@@ -19,7 +19,7 @@ This mobile app is part of the SwiftSend Courier Management System, developed as
 - **Settings Management** — Update profile, notifications, password
 - **Handles Invalid Inputs** gracefully without crashing
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 | Component | Technology |
 |-----------|------------|
@@ -31,7 +31,7 @@ This mobile app is part of the SwiftSend Courier Management System, developed as
 | Backend | Node.js + Express |
 | Database | MySQL |
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Node.js v20+

@@ -1,64 +1,53 @@
 # SwiftSend Mobile App
 Refilwe Phore st10458818
 Ntembeko Ndayi st10180342
+# SwiftSend Mobile Application (Driver & Customer)
 
-Driver and Customer mobile application for SwiftSend Couriers, built with React Native and Expo.
+A React Native (Expo) mobile application built for SwiftSend Couriers. This app allows drivers to view assigned deliveries and update their statuses, and allows customers to track their parcels.
 
-## 📋 Project Overview
+## 🎥 Video Presentation
+Watch the full demonstration of the app's features here: 
+**[Insert your YouTube link here - e.g., https://youtu.be/hYFpER6QJBs]**
 
-This mobile app is part of the SwiftSend Courier Management System, developed as part of the XISD5319 Work Integrated Learning module (Task 2). It connects to a Node.js backend and MySQL database to provide real-time delivery tracking and management.
+## 🚀 Technologies Used
+*   **Framework:** React Native with Expo
+*   **Routing:** Expo Router
+*   **Authentication:** Firebase Auth (Google SSO) & Custom JWT/Bcrypt (Backend)
+*   **Database:** MySQL (via Node.js API)
+*   **HTTP Client:** Axios
+*   **CI/CD:** GitHub Actions
 
-<<<<<<< HEAD
-## Features
-=======
-##  Features
->>>>>>> 4ce6696bf7323773d06e33463e95fbdcb78d51d1
+## ✨ Main Features
+*   **Dual-Role Registration & Login:** Secure authentication with bcrypt password hashing.
+*   **Google Single Sign-On (SSO):** Integrated via Firebase.
+*   **Session Persistence:** Uses AsyncStorage to keep users logged in.
+*   **Driver Dashboard:** View assigned deliveries, update status (Picked Up, In Transit, Delivered), and confirm Proof of Delivery.
+*   **Customer Dashboard:** Track parcels in real-time.
+*   **Settings Management:** Update profile details and preferences.
 
-- **User Registration** with role selection (Customer / Driver)
-- **Secure Login** with bcrypt password encryption
-- **Google Sign-In (SSO)** via Firebase Authentication
-- **Session Management** with auto-login
-- **Driver Dashboard** — View assigned deliveries from MySQL
-- **Customer Dashboard** — Track parcels in real time
-- **Delivery Status Updates** — Mark as Picked Up, In Transit, Delivered
-- **Proof of Delivery** functionality
-- **Settings Management** — Update profile, notifications, password
-- **Handles Invalid Inputs** gracefully without crashing
+## 📦 Release Notes (Version 1.0.0 - Final WIL Release)
+**Innovative Features Added:**
+*   Implemented Google Sign-In (SSO) using Firebase.
+*   Added Role-based dashboards (Driver vs. Customer).
+*   Full delivery status workflow and Proof of Delivery (POD).
+*   Persistent sessions using AsyncStorage.
 
-<<<<<<< HEAD
-## 🛠️ Technology Stack
-=======
-##  Technology Stack
->>>>>>> 4ce6696bf7323773d06e33463e95fbdcb78d51d1
+**Fixes & Improvements (Based on Task 2 Feedback):**
+*   **Security:** Enforced strict input validation on API endpoints to prevent authentication bypass.
+*   **Automated Testing:** Removed the CI bypass (`|| true`) and enforced strict TypeScript compilation. Added Jest and Supertest backend integration tests running on every push via GitHub Actions.
+*   **Documentation:** Updated README and user docs to accurately reflect the current state of the system.
 
-| Component | Technology |
-|-----------|------------|
-| Frontend | React Native (Expo) |
-| Navigation | Expo Router |
-| HTTP Client | Axios |
-| Session Storage | AsyncStorage |
-| Authentication | Firebase Auth |
-| Backend | Node.js + Express |
-| Database | MySQL |
+## 🛠️ Local Development Setup
+1. Clone the repository: `git clone https://github.com/refilwe10/swiftsend-mobile.git`
+2. Install dependencies: `npm install`
+3. Start the app: `npx expo start`
+4. Scan the QR code with the Expo Go app (Android) or use an emulator.
 
-<<<<<<< HEAD
-## 🚀 Getting Started
-=======
-##  Getting Started
->>>>>>> 4ce6696bf7323773d06e33463e95fbdcb78d51d1
+## 🤖 Use of AI Tools
+AI tools (Claude) were used to assist with debugging Expo/Firebase configuration errors, structuring documentation, and reviewing code for security vulnerabilities. All AI-generated suggestions were reviewed and tested on physical devices before implementation.
 
-### Prerequisites
-- Node.js v20+
-- Expo Go app on your phone
-- Backend server running (see backend repo)
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/refilwe10/swiftsend-mobile.git
-<<<<<<< HEAD
-   cd swiftsend-mobile
-=======
+## 👥 Team Members
+*   Refilwe Phore (ST10458818)
+*   Ntembeko Ndayi (ST10180342)
    cd swiftsend-mobile
 >>>>>>> 4ce6696bf7323773d06e33463e95fbdcb78d51d1

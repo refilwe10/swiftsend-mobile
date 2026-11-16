@@ -1,15 +1,10 @@
 # SwiftSend Mobile App
-Refilwe Phore st10458818
-Ntembeko Ndayi st10180342
-# SwiftSend Mobile Application (Driver & Customer)
 
 A React Native (Expo) mobile application built for SwiftSend Couriers. This app allows drivers to view assigned deliveries and update their statuses, and allows customers to track their parcels.
 
-## 🎥 Video Presentation
-Watch the full demonstration of the app's features here: 
-**[Insert your YouTube link here - e.g., https://youtu.be/hYFpER6QJBs]**
 
-## 🚀 Technologies Used
+
+##  Technologies Used
 *   **Framework:** React Native with Expo
 *   **Routing:** Expo Router
 *   **Authentication:** Firebase Auth (Google SSO) & Custom JWT/Bcrypt (Backend)
@@ -17,7 +12,7 @@ Watch the full demonstration of the app's features here:
 *   **HTTP Client:** Axios
 *   **CI/CD:** GitHub Actions
 
-## ✨ Main Features
+##  Main Features
 *   **Dual-Role Registration & Login:** Secure authentication with bcrypt password hashing.
 *   **Google Single Sign-On (SSO):** Integrated via Firebase.
 *   **Session Persistence:** Uses AsyncStorage to keep users logged in.
@@ -25,7 +20,7 @@ Watch the full demonstration of the app's features here:
 *   **Customer Dashboard:** Track parcels in real-time.
 *   **Settings Management:** Update profile details and preferences.
 
-## 📦 Release Notes (Version 1.0.0 - Final WIL Release)
+##  Release Notes (Version 1.0.0 - Final WIL Release)
 **Innovative Features Added:**
 *   Implemented Google Sign-In (SSO) using Firebase.
 *   Added Role-based dashboards (Driver vs. Customer).
@@ -37,16 +32,16 @@ Watch the full demonstration of the app's features here:
 *   **Automated Testing:** Removed the CI bypass (`|| true`) and enforced strict TypeScript compilation. Added Jest and Supertest backend integration tests running on every push via GitHub Actions.
 *   **Documentation:** Updated README and user docs to accurately reflect the current state of the system.
 
-## 🛠️ Local Development Setup
+##  Local Development Setup
 1. Clone the repository: `git clone https://github.com/refilwe10/swiftsend-mobile.git`
 2. Install dependencies: `npm install`
 3. Start the app: `npx expo start`
 4. Scan the QR code with the Expo Go app (Android) or use an emulator.
 
-## 🤖 Use of AI Tools
+##  Use of AI Tools
 AI tools (Claude) were used to assist with debugging Expo/Firebase configuration errors, structuring documentation, and reviewing code for security vulnerabilities. All AI-generated suggestions were reviewed and tested on physical devices before implementation.
 
-## 👥 Team Members
+##  Team Members
 *   Refilwe Phore (ST10458818)
 *   Ntembeko Ndayi (ST10180342)
    cd swiftsend-mobile
